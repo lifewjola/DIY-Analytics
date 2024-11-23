@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from summary import summarize_data
 from llm import ask_llm
-from exec import execute_generated_code
+from execute import execute_generated_code
 
 # Streamlit UI
 st.title("DIY Analytics")
@@ -32,24 +32,25 @@ if uploaded_file:
 
     st.header("Chat with your data!")
     user_query = st.text_input("Ask a question about your dataset:")
-
-    if user_query:
-        code = ask_llm(user_query, summary_data)
-        if st.checkbox("Show code"):
-            st.code(code, language="python")
-        
-        try:
-            results, output = execute_generated_code(code, data)
-
-            if "plt" in results:
-                st.pyplot(results["plt"].gcf())  
-            if output:
-                st.write(output) 
-
-            if isinstance(results, str): 
-                st.error(results)
-            else:
-                st.write("Code executed successfully.")
+    
+    with st.spinner("Insights cooking..."):
+        if user_query:
+            code = ask_llm(user_query, summary_data)
+            if st.checkbox("Show code"):
+                st.code(code, language="python")
             
-        except Exception as e:
-            st.error(f"Error executing code: {e}")
+            try:
+                results, output = execute_generated_code(code, data)
+
+                if "plt" in results:
+                    st.pyplot(results["plt"].gcf())  
+                if output:
+                    st.write(output) 
+
+                if isinstance(results, str): 
+                    st.error(results)
+                else:
+                    st.toast("Code executed successfully.")
+                
+            except Exception as e:
+                st.error(f"Error executing code: {e}")

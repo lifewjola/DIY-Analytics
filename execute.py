@@ -1,15 +1,3 @@
-# def execute_generated_code(code, df):
-#     clean_code = code.strip('```').strip() 
-
-#     local_scope = {"df": df}
-
-#     try:
-#         exec(clean_code, {}, local_scope)
-#     except Exception as e:
-#         return f"Error during execution: {e}"
-
-#     return local_scope
-
 import io
 import sys
 
