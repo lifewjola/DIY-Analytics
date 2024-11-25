@@ -42,10 +42,10 @@ if uploaded_file:
             try:
                 results, output = execute_generated_code(code, data)
 
-                if "plt" in results:
-                    st.pyplot(results["plt"].gcf())  
                 if output:
                     st.write(output) 
+                if "plt" in results:
+                    st.pyplot(results["plt"].gcf())  
 
                 if isinstance(results, str): 
                     st.error(results)
