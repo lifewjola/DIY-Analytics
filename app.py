@@ -34,7 +34,8 @@ if uploaded_file:
     user_query = st.text_input("Ask a question about your dataset:")
     
     with st.spinner("Insights cooking..."):
-        if user_query:            
+        if user_query: 
+            code = ask_llm(user_query, summary_data)
             try:
                 results, output = execute_generated_code(code, data)
 
@@ -52,6 +53,5 @@ if uploaded_file:
             except Exception as e:
                 st.error(f"Error executing code: {e}")
             
-            code = ask_llm(user_query, summary_data)
             if st.checkbox("Show code"):
                 st.code(code, language="python")
