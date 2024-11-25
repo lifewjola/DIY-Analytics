@@ -48,10 +48,10 @@ if uploaded_file:
                     st.error(results)
                 else:
                     st.toast("Code executed successfully.")
-
-            code = ask_llm(user_query, summary_data)
-            if st.checkbox("Show code"):
-                st.code(code, language="python")
                 
             except Exception as e:
                 st.error(f"Error executing code: {e}")
+            
+            code = ask_llm(user_query, summary_data)
+            if st.checkbox("Show code"):
+                st.code(code, language="python")
