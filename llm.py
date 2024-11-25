@@ -12,6 +12,7 @@ def ask_llm(query, data_summary):
         f"Based on the following dataset summary:\n{data_summary}\n"
         "Provide clean python code using pandas and matplotlib (only the code, nothing else) that when executed will:\n"
         f" Answer the user's question: '{query}'.\n"
+        "Note that the unique values of each column are supposed to guide you on how to generate value-specific code/ insights."
         "The code should contain a visualization that is well labelled and inprint whatever text you need to add on the visualization fig."
         "Assume the dataset has been read into a dataframe called df."
         "If the query involves generating a chart (e.g., bar plot), please ensure the chart displays no more than 10 categories (top or bottom)."
